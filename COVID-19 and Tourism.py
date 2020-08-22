@@ -1,28 +1,59 @@
-import csv
 import pandas as pd
+import awoc
 
-def read_data():
+continents_list = awoc.AWOC().get_continents_list()
 
-    file = 'datasets_494766_1402868_country_wise_latest.csv'
-    with open(file) as confirmed_cases_csv:
-        spreadsheet = csv.DictReader(confirmed_cases_csv)
-        for row in spreadsheet:
-            if row['WHO Region'] == 'Europe':
-                print(row)
+df = pd.read_csv('coronavirus-disease-covid-19-statistics-and-research.csv')
 
-data = read_data()
+africa_country = []
+africa_value = []
 
-df = pd.read_csv('datasets_494766_1402868_country_wise_latest.csv', sep=",", header=None)
-print(df)
-'''
-for row in data:
-    print(country['Country/Region'])
+antarctica_country = []
+antarctica_value = []
 
-for row in data:
+asia_country = []
+asia_value = []
 
-    if row['WHO Region'] == 'Europe':
+europe_country = []
+europe_value = []
 
-        max_confirmed_case = max(data,items(), key= lambda x : x[1])
-        print(max_confirmed_case[1], max_confirmed_case[0])
+na_country = []
+na_value = []
 
-'''
+oceania_country = []
+oceania_value = []
+
+sa_country = []
+sa_value = []
+
+country_list = [africa_country,antarctica_country,asia_country,europe_country,na_country,oceania_country,sa_country]
+value_list = [africa_value,antarctica_value,asia_value,europe_value,na_value,oceania_value,sa_value]
+
+i=0
+
+for index, row in df.iterrows():
+    if row['date']=="2020-07-29":
+        if row['continent']==continents_list[i]:
+            country = row['location']
+            country_list[i].append(country)
+
+            value = row['total_cases']
+            value_list[i].append(value)
+
+        elif row['continent'] == continents_list[i+2]:
+            country = row['location']
+            country_list[i+2].append(country)
+
+            value = row['total_cases']
+            value_list[i+2].append(value)
+
+
+
+
+print(africa_country)
+print(africa_value)
+print(asia_country)
+print(asia_value)
+
+
+
