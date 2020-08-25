@@ -43,7 +43,7 @@ bottom_frame=tk.Frame(window).pack(side='bottom')
 
 
 
-#Top frame
+#Title label telling us what date the data is taken from
 data_label = tk.Label(top_frame,text="Data taken from 'UNCOVER COVID-19 Challenge: \n "
                           "United Network for COVID Data Exploration and Research'",font=("Arial",20)).pack()
 
@@ -71,7 +71,8 @@ def gdp_graph():
 def hospital_beds_graph():
 
     hospital_beds_plot = sns.lmplot(x='gdp_per_capita',
-                                    y='hospital_beds_per_thousand', data=only_july29_df, hue='continent',legend=False, ci=None)
+                                    y='hospital_beds_per_thousand', data=only_july29_df, hue='continent',legend=False,
+                                    ci=None) #Removes 95% confidence shading
 
     plt.xlim(0, None)
     plt.ylim(0, 10)
