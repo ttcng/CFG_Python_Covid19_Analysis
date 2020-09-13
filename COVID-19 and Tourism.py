@@ -57,7 +57,10 @@ only_july29_df = df.loc[(df['date']== date) & (df['location'] != 'World') & (df[
 
 def gdp_graph():
 
-    gdp_plot = sns.lmplot(x='gdp_per_capita', y='total_cases', data=only_july29_df, hue='continent',legend=False, ci=None)
+    #lmplot -> Linear Regression plots
+    gdp_plot = sns.lmplot(x='gdp_per_capita', y='total_cases', data=only_july29_df, hue='continent',
+                          legend=False, ci=None) #Removes 95% confidence shading
+
 
     plt.xlim(0, None)
     plt.ylim(0, 500000)
@@ -146,11 +149,11 @@ def global_cases():
     return result
 
 def global_maximum():
-    minimum_country_cases = max(d['Total_cases'] for d in by_country.values() if d)
+    maximum_country_cases = max(d['Total_cases'] for d in by_country.values() if d)
 
     for country, country_info in by_country.items():
         for key, value in country_info.items():
-            if value == minimum_country_cases:
+            if value == maximum_country_cases:
                 result = 'The highest number of cases globally is {} ({}).'.format(value, country)
                 return result
 
